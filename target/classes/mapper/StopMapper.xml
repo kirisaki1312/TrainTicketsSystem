@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kirisaki.mapper.StopMapper">
+  <resultMap id="BaseResultMap" type="com.kirisaki.pojo.Stop">
+    <id column="stop_id" jdbcType="INTEGER" property="stop_id" />
+    <result column="stop_name" jdbcType="VARCHAR" property="stop_name" />
+    <result column="city_name" jdbcType="VARCHAR" property="city_name" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    stop_id, stop_name, city_name
+  </sql>
+  <select id="selectByExample" parameterType="com.kirisaki.pojo.StopExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from stop
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stop
+    where stop_id = #{stop_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from stop
+    where stop_id = #{stop_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="stop_id" keyProperty="stop_id" parameterType="com.kirisaki.pojo.Stop" useGeneratedKeys="true">
+    insert into stop (stop_name, city_name)
+    values (#{stop_name,jdbcType=VARCHAR}, #{city_name,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="stop_id" keyProperty="stop_id" parameterType="com.kirisaki.pojo.Stop" useGeneratedKeys="true">
+    insert into stop
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stop_name != null">
+        stop_name,
+      </if>
+      <if test="city_name != null">
+        city_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stop_name != null">
+        #{stop_name,jdbcType=VARCHAR},
+      </if>
+      <if test="city_name != null">
+        #{city_name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kirisaki.pojo.Stop">
+    update stop
+    <set>
+      <if test="stop_name != null">
+        stop_name = #{stop_name,jdbcType=VARCHAR},
+      </if>
+      <if test="city_name != null">
+        city_name = #{city_name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where stop_id = #{stop_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kirisaki.pojo.Stop">
+    update stop
+    set stop_name = #{stop_name,jdbcType=VARCHAR},
+      city_name = #{city_name,jdbcType=VARCHAR}
+    where stop_id = #{stop_id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAll" resultType="com.kirisaki.pojo.Stop">
+    select * from stop
+  </select>
+
+</mapper>

@@ -1,0 +1,135 @@
+tmall
+Page [start=0, count=5, total=0, getStart()=0, getCount()=5, isHasPreviouse()=false, isHasNext()=false, getTotalPage()=1, getLast()=0]
+DEBUG [http-bio-8080-exec-7] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@feb685]
+DEBUG [http-bio-8080-exec-7] - ==>  Preparing: SELECT count(0) FROM category 
+DEBUG [http-bio-8080-exec-7] - ==> Parameters: 
+TRACE [http-bio-8080-exec-7] - <==    Columns: count(0)
+TRACE [http-bio-8080-exec-7] - <==        Row: 17
+DEBUG [http-bio-8080-exec-7] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@feb685]
+DEBUG [http-bio-8080-exec-7] - ==>  Preparing: select 'false' as QUERYID, id, name from category order by id desc LIMIT ? 
+DEBUG [http-bio-8080-exec-7] - ==> Parameters: 5(Integer)
+TRACE [http-bio-8080-exec-7] - <==    Columns: QUERYID, id, name
+TRACE [http-bio-8080-exec-7] - <==        Row: false, 83, 平板电视
+TRACE [http-bio-8080-exec-7] - <==        Row: false, 82, 马桶
+TRACE [http-bio-8080-exec-7] - <==        Row: false, 81, 沙发
+TRACE [http-bio-8080-exec-7] - <==        Row: false, 80, 电热水器
+TRACE [http-bio-8080-exec-7] - <==        Row: false, 79, 平衡车
+Page [start=0, count=5, total=17, getStart()=0, getCount()=5, isHasPreviouse()=false, isHasNext()=true, getTotalPage()=4, getLast()=15]
+
+trainticket
+Page [start=0, count=5, total=0, getStart()=0, getCount()=5, isHasPreviouse()=false, isHasNext()=false, getTotalPage()=1, getLast()=0]
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: SELECT count(0) FROM ticket WHERE user_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 1(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: count(0)
+TRACE [http-bio-8080-exec-8] - <==        Row: 15
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select * from ticket where user_id=? LIMIT ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 1(Integer), 5(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: ticket_id, user_id, train_id, seat_id, start_time, start_stop_id, end_time, end_stop_id, create_at, expense, status
+TRACE [http-bio-8080-exec-8] - <==        Row: 3, 1, 3, 202, 2019-06-18 09:00:00, 1, 2019-06-18 12:36:00, 4, 2019-06-26 14:29:28, 446.29, 未付款
+TRACE [http-bio-8080-exec-8] - <==        Row: 9, 1, 3, 206, 2019-06-18 09:00:00, 1, 2019-06-18 13:48:00, 5, 2019-09-17 20:00:04, 631.12, 未付款
+TRACE [http-bio-8080-exec-8] - <==        Row: 10, 1, 3, 204, 2019-06-18 09:00:00, 1, 2019-06-18 17:24:00, 8, 2019-11-01 17:33:58, 1024.60, 未付款
+TRACE [http-bio-8080-exec-8] - <==        Row: 12, 1, 3, 208, 2019-06-18 09:00:00, 1, 2019-06-18 10:12:00, 2, 2019-11-01 17:47:11, 84.36, 未付款
+TRACE [http-bio-8080-exec-8] - <==        Row: 13, 1, 1, 2, 2019-06-18 09:00:00, 1, 2019-06-18 11:24:00, 3, 2019-11-05 22:03:07, 180.96, 未付款
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select train_id, train_name, train_type, status from train where train_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 3(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: train_id, train_name, train_type, status
+TRACE [http-bio-8080-exec-8] - <==        Row: 3, G1003, 高铁, 运营中
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select seat_id, train_id, seat_type, seat_location from seat where seat_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 202(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: seat_id, train_id, seat_type, seat_location
+TRACE [http-bio-8080-exec-8] - <==        Row: 202, 3, 一等座, 2A
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select stop_id, stop_name, city_name from stop where stop_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 1(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: stop_id, stop_name, city_name
+TRACE [http-bio-8080-exec-8] - <==        Row: 1, 北京西, 北京
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select stop_id, stop_name, city_name from stop where stop_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 4(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: stop_id, stop_name, city_name
+TRACE [http-bio-8080-exec-8] - <==        Row: 4, 郑州东, 郑州
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select train_id, train_name, train_type, status from train where train_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 3(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: train_id, train_name, train_type, status
+TRACE [http-bio-8080-exec-8] - <==        Row: 3, G1003, 高铁, 运营中
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select seat_id, train_id, seat_type, seat_location from seat where seat_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 206(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: seat_id, train_id, seat_type, seat_location
+TRACE [http-bio-8080-exec-8] - <==        Row: 206, 3, 一等座, 6A
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select stop_id, stop_name, city_name from stop where stop_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 1(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: stop_id, stop_name, city_name
+TRACE [http-bio-8080-exec-8] - <==        Row: 1, 北京西, 北京
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select stop_id, stop_name, city_name from stop where stop_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 5(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: stop_id, stop_name, city_name
+TRACE [http-bio-8080-exec-8] - <==        Row: 5, 明港东, 明港
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select train_id, train_name, train_type, status from train where train_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 3(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: train_id, train_name, train_type, status
+TRACE [http-bio-8080-exec-8] - <==        Row: 3, G1003, 高铁, 运营中
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select seat_id, train_id, seat_type, seat_location from seat where seat_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 204(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: seat_id, train_id, seat_type, seat_location
+TRACE [http-bio-8080-exec-8] - <==        Row: 204, 3, 一等座, 4A
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select stop_id, stop_name, city_name from stop where stop_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 1(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: stop_id, stop_name, city_name
+TRACE [http-bio-8080-exec-8] - <==        Row: 1, 北京西, 北京
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select stop_id, stop_name, city_name from stop where stop_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 8(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: stop_id, stop_name, city_name
+TRACE [http-bio-8080-exec-8] - <==        Row: 8, 长沙南, 长沙
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select train_id, train_name, train_type, status from train where train_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 3(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: train_id, train_name, train_type, status
+TRACE [http-bio-8080-exec-8] - <==        Row: 3, G1003, 高铁, 运营中
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select seat_id, train_id, seat_type, seat_location from seat where seat_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 208(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: seat_id, train_id, seat_type, seat_location
+TRACE [http-bio-8080-exec-8] - <==        Row: 208, 3, 一等座, 8A
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select stop_id, stop_name, city_name from stop where stop_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 1(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: stop_id, stop_name, city_name
+TRACE [http-bio-8080-exec-8] - <==        Row: 1, 北京西, 北京
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select stop_id, stop_name, city_name from stop where stop_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 2(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: stop_id, stop_name, city_name
+TRACE [http-bio-8080-exec-8] - <==        Row: 2, 保定东, 保定
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select train_id, train_name, train_type, status from train where train_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 1(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: train_id, train_name, train_type, status
+TRACE [http-bio-8080-exec-8] - <==        Row: 1, G1001, 高铁, 运营中
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select seat_id, train_id, seat_type, seat_location from seat where seat_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 2(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: seat_id, train_id, seat_type, seat_location
+TRACE [http-bio-8080-exec-8] - <==        Row: 2, 1, 一等座, 2A
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select stop_id, stop_name, city_name from stop where stop_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 1(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: stop_id, stop_name, city_name
+TRACE [http-bio-8080-exec-8] - <==        Row: 1, 北京西, 北京
+DEBUG [http-bio-8080-exec-8] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@3e1d7599]
+DEBUG [http-bio-8080-exec-8] - ==>  Preparing: select stop_id, stop_name, city_name from stop where stop_id = ? 
+DEBUG [http-bio-8080-exec-8] - ==> Parameters: 3(Integer)
+TRACE [http-bio-8080-exec-8] - <==    Columns: stop_id, stop_name, city_name
+TRACE [http-bio-8080-exec-8] - <==        Row: 3, 石家庄站, 石家庄
+Page [start=0, count=5, total=5, getStart()=0, getCount()=5, isHasPreviouse()=false, isHasNext()=false, getTotalPage()=1, getLast()=0]

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kirisaki.mapper.TrainMapper">
+  <resultMap id="BaseResultMap" type="com.kirisaki.pojo.Train">
+    <id column="train_id" jdbcType="INTEGER" property="train_id" />
+    <result column="train_name" jdbcType="VARCHAR" property="train_name" />
+    <result column="train_type" jdbcType="VARCHAR" property="train_type" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    train_id, train_name, train_type, status
+  </sql>
+  <select id="selectByExample" parameterType="com.kirisaki.pojo.TrainExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from train
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from train
+    where train_id = #{train_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from train
+    where train_id = #{train_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="train_id" keyProperty="train_id" parameterType="com.kirisaki.pojo.Train" useGeneratedKeys="true">
+    insert into train (train_name, train_type, status
+      )
+    values (#{train_name,jdbcType=VARCHAR}, #{train_type,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="train_id" keyProperty="train_id" parameterType="com.kirisaki.pojo.Train" useGeneratedKeys="true">
+    insert into train
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="train_name != null">
+        train_name,
+      </if>
+      <if test="train_type != null">
+        train_type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="train_name != null">
+        #{train_name,jdbcType=VARCHAR},
+      </if>
+      <if test="train_type != null">
+        #{train_type,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kirisaki.pojo.Train">
+    update train
+    <set>
+      <if test="train_name != null">
+        train_name = #{train_name,jdbcType=VARCHAR},
+      </if>
+      <if test="train_type != null">
+        train_type = #{train_type,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where train_id = #{train_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kirisaki.pojo.Train">
+    update train
+    set train_name = #{train_name,jdbcType=VARCHAR},
+      train_type = #{train_type,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where train_id = #{train_id,jdbcType=INTEGER}
+  </update>
+
+
+</mapper>

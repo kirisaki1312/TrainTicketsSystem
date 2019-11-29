@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kirisaki.mapper.TicketMapper">
+  <resultMap id="BaseResultMap" type="com.kirisaki.pojo.Ticket">
+    <id column="ticket_id" jdbcType="INTEGER" property="ticket_id" />
+    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="train_id" jdbcType="INTEGER" property="train_id" />
+    <result column="seat_id" jdbcType="INTEGER" property="seat_id" />
+    <result column="start_time" jdbcType="VARCHAR" property="start_time" />
+    <result column="start_stop_id" jdbcType="INTEGER" property="start_stop_id" />
+    <result column="end_time" jdbcType="VARCHAR" property="end_time" />
+    <result column="end_stop_id" jdbcType="INTEGER" property="end_stop_id" />
+    <result column="create_at" jdbcType="VARCHAR" property="create_at" />
+    <result column="expense" jdbcType="DOUBLE" property="expense" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ticket_id, user_id, train_id, seat_id, start_time, start_stop_id, end_time, end_stop_id, 
+    create_at, expense, status
+  </sql>
+  <select id="selectByExample" parameterType="com.kirisaki.pojo.TicketExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ticket
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ticket
+    where ticket_id = #{ticket_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ticket
+    where ticket_id = #{ticket_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ticket_id" keyProperty="ticket_id" parameterType="com.kirisaki.pojo.Ticket" useGeneratedKeys="true">
+    insert into ticket (user_id, train_id, seat_id, 
+      start_time, start_stop_id, end_time, 
+      end_stop_id, create_at, expense, 
+      status)
+    values (#{user_id,jdbcType=INTEGER}, #{train_id,jdbcType=INTEGER}, #{seat_id,jdbcType=INTEGER}, 
+      #{start_time,jdbcType=VARCHAR}, #{start_stop_id,jdbcType=INTEGER}, #{end_time,jdbcType=VARCHAR}, 
+      #{end_stop_id,jdbcType=INTEGER}, #{create_at,jdbcType=VARCHAR}, #{expense,jdbcType=DOUBLE}, 
+      #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ticket_id" keyProperty="ticket_id" parameterType="com.kirisaki.pojo.Ticket" useGeneratedKeys="true">
+    insert into ticket
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="train_id != null">
+        train_id,
+      </if>
+      <if test="seat_id != null">
+        seat_id,
+      </if>
+      <if test="start_time != null">
+        start_time,
+      </if>
+      <if test="start_stop_id != null">
+        start_stop_id,
+      </if>
+      <if test="end_time != null">
+        end_time,
+      </if>
+      <if test="end_stop_id != null">
+        end_stop_id,
+      </if>
+      <if test="create_at != null">
+        create_at,
+      </if>
+      <if test="expense != null">
+        expense,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="user_id != null">
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="train_id != null">
+        #{train_id,jdbcType=INTEGER},
+      </if>
+      <if test="seat_id != null">
+        #{seat_id,jdbcType=INTEGER},
+      </if>
+      <if test="start_time != null">
+        #{start_time,jdbcType=VARCHAR},
+      </if>
+      <if test="start_stop_id != null">
+        #{start_stop_id,jdbcType=INTEGER},
+      </if>
+      <if test="end_time != null">
+        #{end_time,jdbcType=VARCHAR},
+      </if>
+      <if test="end_stop_id != null">
+        #{end_stop_id,jdbcType=INTEGER},
+      </if>
+      <if test="create_at != null">
+        #{create_at,jdbcType=VARCHAR},
+      </if>
+      <if test="expense != null">
+        #{expense,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kirisaki.pojo.Ticket">
+    update ticket
+    <set>
+      <if test="user_id != null">
+        user_id = #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="train_id != null">
+        train_id = #{train_id,jdbcType=INTEGER},
+      </if>
+      <if test="seat_id != null">
+        seat_id = #{seat_id,jdbcType=INTEGER},
+      </if>
+      <if test="start_time != null">
+        start_time = #{start_time,jdbcType=VARCHAR},
+      </if>
+      <if test="start_stop_id != null">
+        start_stop_id = #{start_stop_id,jdbcType=INTEGER},
+      </if>
+      <if test="end_time != null">
+        end_time = #{end_time,jdbcType=VARCHAR},
+      </if>
+      <if test="end_stop_id != null">
+        end_stop_id = #{end_stop_id,jdbcType=INTEGER},
+      </if>
+      <if test="create_at != null">
+        create_at = #{create_at,jdbcType=VARCHAR},
+      </if>
+      <if test="expense != null">
+        expense = #{expense,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ticket_id = #{ticket_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kirisaki.pojo.Ticket">
+    update ticket
+    set user_id = #{user_id,jdbcType=INTEGER},
+      train_id = #{train_id,jdbcType=INTEGER},
+      seat_id = #{seat_id,jdbcType=INTEGER},
+      start_time = #{start_time,jdbcType=VARCHAR},
+      start_stop_id = #{start_stop_id,jdbcType=INTEGER},
+      end_time = #{end_time,jdbcType=VARCHAR},
+      end_stop_id = #{end_stop_id,jdbcType=INTEGER},
+      create_at = #{create_at,jdbcType=VARCHAR},
+      expense = #{expense,jdbcType=DOUBLE},
+      status = #{status,jdbcType=VARCHAR}
+    where ticket_id = #{ticket_id,jdbcType=INTEGER}
+  </update>
+
+  <!--以下为新加入的复杂SQL--><!-- xml转义 小于符-> &lt; -->
+  <!-- 使用resultMap="QueryTicketResultMap"和resultType="com.kirisaki.pojo.QueryTicket"都能接List -->
+  <select id="selectByCityAndDate" resultType="com.kirisaki.pojo.QueryTicket">
+    select a.train_id, c.train_name, a.stop_id as start_index, b.stop_id as end_index, d.city_name as start_city, e.city_name as end_city, a.arrive_time as start_time, b.arrive_time as end_time, (b.mileage - a.mileage) as mileage
+    from `12307`.line as a,`12307`.line as b,`12307`.train as c,`12307`.stop as d,`12307`.stop as e
+    where (a.stop_id=d.stop_id) and (b.stop_id=e.stop_id) and a.stop_id = #{1} and b.stop_id = #{2} and a.stop_id &lt; b.stop_id and a.arrive_time like#{0} and a.train_id = b.train_id and a.train_id = c.train_id and
+    a.train_id not in (
+    select train_id
+    from `12307`.train
+    where status = '停运')
+  </select>
+
+  <select id="selectRemainSeat" resultType="com.kirisaki.pojo.RemainSeat">
+    select t.train_id, s.seat_type, count(s.seat_type) as remain_num
+    from `12307`.train as t, `12307`.seat as s
+    where t.train_id = #{0} and t.train_id = s.train_id and s.seat_id not in (
+    select seat_id
+    from `12307`.ticket
+    where train_id = #{0} and start_time like#{1} and ((start_stop_id >= #{2} and start_stop_id &lt; #{3}) or (end_stop_id > #{2} and end_stop_id &lt;= #{3})))
+    group by s.seat_type
+  </select>
+
+  <select id="selectRemainSeatDetail" resultType="com.kirisaki.pojo.RemainSeatDetail">
+    select t.train_id, s.seat_id, s.seat_type, s.seat_location
+    from `12307`.train as t, `12307`.seat as s
+    where t.train_id = #{0} and t.train_id = s.train_id and s.seat_id not in (
+    select seat_id
+    from `12307`.ticket
+    where train_id = #{0} and start_time like#{1} and ((start_stop_id >= #{2} and start_stop_id &lt; #{3}) or (end_stop_id > #{2} and end_stop_id &lt;= #{3})))
+  </select>
+
+  <select id="selectByUserId" parameterType="Integer" resultType="com.kirisaki.pojo.Ticket">
+    select * from ticket where user_id=#{0}
+  </select>
+
+  <!--<delete id="">
+      delete from ticket where ticket_id=#{0}
+  </delete>-->
+
+</mapper>
